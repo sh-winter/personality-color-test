@@ -11,9 +11,7 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
-  server: {
-    base: "/personality-color-test/",
-  },
+  base: "/personality-color-test/",
   build: {
     outDir: "docs",
   },
