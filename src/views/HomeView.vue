@@ -97,11 +97,7 @@ function genChart() {
 }
 </script>
 <template>
-  <el-form
-    ref="formRef"
-    :model="state.answers"
-    style="width: 980px; margin: 0 auto"
-  >
+  <el-form ref="formRef" :model="state.answers" style="margin: 0 auto">
     <h1>色彩性格测试</h1>
     <br />
     <hr />
@@ -130,7 +126,7 @@ function genChart() {
       <el-button type="primary" @click="submit">提交</el-button>
     </el-form-item>
   </el-form>
-  <el-dialog v-model="state.visible" title="性格色彩报告">
+  <el-dialog v-model="state.visible" title="性格色彩报告" width="80%">
     <div class="chart" ref="chartRef"></div>
   </el-dialog>
 </template>
@@ -159,8 +155,25 @@ function genChart() {
   white-space: normal;
 }
 .chart {
-  height: 600px;
-  width: 600px;
+  height: 300px;
+  width: 100%;
+  max-width: 600px;
   margin: 0 auto;
+  transition: 0.2s;
+}
+@media (min-width: 768px) {
+  .chart {
+    height: 400px;
+  }
+}
+@media (min-width: 992px) {
+  .chart {
+    height: 500px;
+  }
+}
+@media (min-width: 1200px) {
+  .chart {
+    height: 600px;
+  }
 }
 </style>
