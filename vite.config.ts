@@ -14,4 +14,7 @@ export default defineConfig({
   server: {
     base: "/personality-color-test/",
   },
+  build: {
+    outDir: "docs",
+  },
 });
