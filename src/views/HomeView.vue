@@ -12,8 +12,8 @@ interface State {
 const formRef = ref<typeof ElForm>();
 const chartRef = ref<HTMLDivElement>();
 const state: State = reactive({
-  answers: Object.fromEntries(Questions.map((_, i) => [i, "A"])),
-  // answers: Object.fromEntries(Questions.map((_, i) => [i, undefined])),
+  // answers: Object.fromEntries(Questions.map((_, i) => [i, "A"])),
+  answers: Object.fromEntries(Questions.map((_, i) => [i, undefined])),
   visible: false,
 });
 
@@ -21,14 +21,9 @@ async function submit() {
   try {
     await formRef.value?.validate();
   } catch (err) {
-    console.log("🚀 ~ file: HomeView.vue ~ line 19 ~ submit ~ err", err);
     const firstField = (
       err as NonNullable<FormValidateFailure["errors"]>[]
     )[0]?.[0]?.field;
-    console.log(
-      "🚀 ~ file: HomeView.vue ~ line 20 ~ submit ~ firstField",
-      firstField
-    );
     if (firstField) formRef.value?.scrollToField(firstField);
     return;
   }
@@ -55,6 +50,7 @@ function genChart() {
   const blueCount = (first15Questions["B"] ?? 0) + (last15Questions["C"] ?? 0);
   const yellowCount =
     (first15Questions["C"] ?? 0) + (last15Questions["B"] ?? 0);
+  const greenCount = (first15Questions["D"] ?? 0) + (last15Questions["A"] ?? 0);
 
   const chart = init(chartRef.value!);
 
@@ -82,6 +78,7 @@ function genChart() {
           { value: redCount, name: "红色(red)" },
           { value: blueCount, name: "蓝色(blue)" },
           { value: yellowCount, name: "黄色(yellow)" },
+          { value: greenCount, name: "绿色(green)" },
         ],
         emphasis: {
           itemStyle: {
@@ -92,7 +89,7 @@ function genChart() {
         },
       },
     ],
-    color: ["red", "blue", "yellow"],
+    color: ["red", "blue", "yellow", "green"],
   });
 }
 </script>

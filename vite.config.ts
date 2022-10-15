@@ -2,19 +2,28 @@ import { fileURLToPath, URL } from "node:url";
 
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import AutoImport from "unplugin-auto-import/vite";
-import Components from "unplugin-vue-components/vite";
-import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import { cdn } from "vite-plugin-cdn2";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-    }),
-    Components({
-      resolvers: [ElementPlusResolver()],
+    cdn({
+      isProduction: true,
+      modules: [
+        {
+          name: "vue",
+          global: "Vue",
+        },
+        {
+          name: "element-plus",
+          global: "ElementPlus",
+        },
+        {
+          name: "echarts",
+          global: "echarts",
+        },
+      ],
     }),
   ],
   resolve: {
