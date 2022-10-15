@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Questions from "@/assets/test-questions.json";
-import * as echarts from "echarts";
+import { init } from "echarts";
 import type { ElForm, FormValidateFailure } from "element-plus";
 import { nextTick, reactive, ref } from "vue";
 
@@ -56,7 +56,7 @@ function genChart() {
   const yellowCount =
     (first15Questions["C"] ?? 0) + (last15Questions["B"] ?? 0);
 
-  const chart = echarts.init(chartRef.value!);
+  const chart = init(chartRef.value!);
 
   chart.setOption({
     title: {
@@ -161,5 +161,6 @@ function genChart() {
 .chart {
   height: 600px;
   width: 600px;
+  margin: 0 auto;
 }
 </style>
